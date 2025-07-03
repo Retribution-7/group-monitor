@@ -1,0 +1,58 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Backend for Backend for a group monitor assistant built with Node.js",
+  "main": "index.js",
+  "scripts": {
+    "start": "node dist/main.js",
+    "dev": "nodemon",
+    "generate": "prisma generate",
+    "dev:inspect": "set NODE_OPTIONS=--inspect=9223 && nodemon -e ts,json --exec ts-node src/main.ts",
+    "lint": "eslint ./src/**",
+    "lint:fix": "eslint ./src/** --fix",
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Retribution-7/group-monitor.git"
+  },
+  "keywords": [
+    "assistant",
+    "group"
+  ],
+  "author": "Anton Radkov + Alexandra Romanova",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^6.11.0",
+    "@types/bcryptjs": "^3.0.0",
+    "bcryptjs": "^3.0.2",
+    "body-parser": "^2.2.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.2",
+    "dotenv": "^17.0.1",
+    "express": "^5.1.0",
+    "inversify": "^6.2.0",
+    "jsonwebtoken": "^9.0.2",
+    "tslog": "^4.9.3"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.1",
+    "@types/express": "^5.0.3",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^24.0.7",
+    "@typescript-eslint/eslint-plugin": "^8.35.0",
+    "@typescript-eslint/parser": "^8.35.0",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.5.1",
+    "nodemon": "^3.1.10",
+    "prettier": "^3.6.2",
+    "prisma": "^6.11.0",
+    "ts-node": "^10.9.2"
+  },
+  "bugs": {
+    "url": "https://github.com/Retribution-7/group-monitor/issues"
+  },
+  "homepage": "https://github.com/Retribution-7/group-monitor#readme"
+}
