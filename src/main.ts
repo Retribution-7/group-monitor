@@ -14,6 +14,9 @@ import { ConfigService } from './config/config.service';
 import { PrismaService } from './database/prisma.service';
 import { IUsersRepository } from './users/users.repository.interface';
 import { UsersRepository } from './users/users.repository';
+import { LessonsRepository } from './lessons/lessons.repository';
+import { LessonsService } from './lessons/lessons.service';
+import { LessonsController } from './lessons/lessons.controller';
 
 export interface IBootstrapReturn {
 	appContainer: Container;
@@ -27,6 +30,9 @@ export const appBindings = new ContainerModule((bind: interfaces.Bind) => {
 	bind<IUserService>(TYPES.UserService).to(UserService);
 	bind<IConfigService>(TYPES.ConfigService).to(ConfigService).inSingletonScope();
 	bind<IUsersRepository>(TYPES.UsersRepository).to(UsersRepository).inSingletonScope();
+	bind<LessonsRepository>(TYPES.LessonsRepository).to(LessonsRepository).inSingletonScope();
+	bind<LessonsService>(TYPES.LessonsService).to(LessonsService).inSingletonScope();
+	bind<LessonsController>(TYPES.LessonsController).to(LessonsController).inSingletonScope();
 	bind<PrismaService>(TYPES.PrismaService).to(PrismaService).inSingletonScope();
 	bind<App>(TYPES.Application).to(App);
 });
