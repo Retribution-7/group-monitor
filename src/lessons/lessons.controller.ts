@@ -23,7 +23,7 @@ export class LessonsController extends BaseController implements ILessonsControl
 				method: 'post',
 			},
 			{
-				path: '/by-date/:date',
+				path: '/',
 				func: this.getByDate as unknown as (
 					req: Request,
 					res: Response,
@@ -32,7 +32,7 @@ export class LessonsController extends BaseController implements ILessonsControl
 				method: 'get',
 			},
 			{
-				path: '/update/:id',
+				path: '/:id',
 				func: this.update as unknown as (
 					req: Request,
 					res: Response,
@@ -41,7 +41,7 @@ export class LessonsController extends BaseController implements ILessonsControl
 				method: 'patch',
 			},
 			{
-				path: '/delete/:id',
+				path: '/:id',
 				func: this.delete as unknown as (
 					req: Request,
 					res: Response,
@@ -71,14 +71,22 @@ export class LessonsController extends BaseController implements ILessonsControl
 	}
 
 	async getByDate(
-		req: Request<{ date: string }>,
+		req: Request<object, object, object, { date?: string }>,
 		res: Response,
 		next: NextFunction,
 	): Promise<void> {
-		const lessons = await this.lessonsService.getLessonsByDate(req.params.date);
+		const { date } = req.query;
+
+		if (!date) {
+			return next(new HTTPError(400, 'Не указана дата в query-параметре'));
+		}
+
+		const lessons = await this.lessonsService.getLessonsByDate(date);
+
 		if (!lessons || lessons.length === 0) {
 			return next(new HTTPError(404, 'Пар в заданную дату нет'));
 		}
+
 		this.ok(res, lessons);
 	}
 

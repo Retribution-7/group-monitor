@@ -1,6 +1,6 @@
 import { inject, injectable } from 'inversify';
 import { LessonModel } from '../generated/prisma';
-import { Lesson, LessonType } from './lesson.entity';
+import { Lesson } from './lesson.entity';
 import { ILessonsRepository } from './lessons.repository.interface';
 import { TYPES } from '../types';
 import { PrismaService } from '../database/prisma.service';
@@ -63,7 +63,6 @@ export class LessonsRepository implements ILessonsRepository {
 	async update(id: number, dto: LessonUpdateDto): Promise<LessonModel> {
 		const updateData: any = {};
 
-		// Если обновляется дата - преобразуем в ISO-формат
 		if (dto.date) {
 			updateData.date = new Date(dto.date).toISOString();
 		}
