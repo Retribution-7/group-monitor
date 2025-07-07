@@ -9,9 +9,8 @@ import { IExeptionFilter } from './errors/exeption.filter.interface';
 import { IConfigService } from './config/config.service.interface';
 import { PrismaService } from './database/prisma.service';
 import { AuthMiddleware } from './common/auth.middleware';
-import { ILessonsController } from './lessons/lessons.controller.interface';
-import { IUserController } from './users/users.controller.interface';
 import { LessonsController } from './lessons/lessons.controller';
+import { StudentsController } from './students/students.controller';
 
 @injectable()
 export class App {
@@ -23,6 +22,7 @@ export class App {
 		@inject(TYPES.ILogger) private readonly logger: ILogger,
 		@inject(TYPES.UserController) private readonly userController: UserController,
 		@inject(TYPES.LessonsController) private readonly lessonsController: LessonsController,
+		@inject(TYPES.StudentsController) private readonly studentsController: StudentsController,
 		@inject(TYPES.ExeptionFilter) private readonly exeptionFilter: IExeptionFilter,
 		@inject(TYPES.ConfigService) private readonly configService: IConfigService,
 		@inject(TYPES.PrismaService) private readonly prismaService: PrismaService,
@@ -40,6 +40,7 @@ export class App {
 	useRoutes(): void {
 		this.app.use('/users', this.userController.router);
 		this.app.use('/lessons', this.lessonsController.router);
+		this.app.use('/students', this.studentsController.router);
 	}
 
 	useExeptionFilters(): void {
