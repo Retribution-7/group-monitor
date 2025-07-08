@@ -1,9 +1,12 @@
 import { IsDate, IsEnum, IsNotEmpty, IsOptional, IsString, Matches } from 'class-validator';
 import { LessonType } from '../lesson.entity';
+import { Type } from 'class-transformer';
 
 export class LessonUpdateDto {
 	@IsOptional()
 	@IsDate()
+	@IsNotEmpty()
+	@Type(() => Date)
 	date?: Date;
 
 	@IsOptional()

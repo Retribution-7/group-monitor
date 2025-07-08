@@ -1,8 +1,11 @@
-import { IsEnum, IsNotEmpty, IsString, Matches } from 'class-validator';
+import { IsDate, IsEnum, IsNotEmpty, IsString, Matches } from 'class-validator';
 import { LessonType } from '../lesson.entity';
+import { Type } from 'class-transformer';
 
 export class LessonCreateDto {
-	@IsString()
+	@IsDate()
+	@IsNotEmpty()
+	@Type(() => Date)
 	date: Date;
 
 	@IsString()
