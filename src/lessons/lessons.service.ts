@@ -6,8 +6,7 @@ import { TYPES } from '../types';
 import { ILessonsRepository } from './lessons.repository.interface';
 import { Lesson, LessonType } from './lesson.entity';
 import { LessonUpdateDto } from './dto/update-lesson.dto';
-import { parseDate } from '../helpers/helpers';
-
+import dayjs from 'dayjs';
 @injectable()
 export class LessonsService implements ILessonsService {
 	constructor(
@@ -15,7 +14,7 @@ export class LessonsService implements ILessonsService {
 	) {}
 	async createLesson(dto: LessonCreateDto): Promise<LessonModel> {
 		const lesson = new Lesson(
-			parseDate(dto.date.toISOString()),
+			dayjs(dto.date, 'DD.MM.YY').toDate(),
 			dto.start,
 			dto.end,
 			dto.subject,

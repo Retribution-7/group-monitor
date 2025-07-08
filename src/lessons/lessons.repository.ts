@@ -19,11 +19,9 @@ export class LessonsRepository implements ILessonsRepository {
 		auditorium,
 		lessonsType,
 	}: Lesson): Promise<LessonModel> {
-		const isoDate = date.toISOString();
-
 		return this.prismaService.client.lessonModel.create({
 			data: {
-				date: isoDate,
+				date,
 				start,
 				end,
 				subject,
@@ -63,7 +61,7 @@ export class LessonsRepository implements ILessonsRepository {
 	async update(id: number, dto: LessonUpdateDto): Promise<LessonModel> {
 		const updateData: any = {};
 
-		if (dto.date) updateData.date = new Date(dto.date).toISOString();
+		if (dto.date) updateData.date = new Date(dto.date);
 		if (dto.start) updateData.start = dto.start;
 		if (dto.end) updateData.end = dto.end;
 		if (dto.subject) updateData.subject = dto.subject;
