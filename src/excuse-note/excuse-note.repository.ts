@@ -64,11 +64,13 @@ export class ExcuseNoteRepository implements IExcuseNoteRepository {
 		const updateData: any = {};
 		if (dto.studentId) updateData.studentId = dto.studentId;
 		if (dto.noteNumber) updateData.noteNumber = dto.noteNumber;
-		if (dto.issueDate) updateData.issueDate = dto.issueDate;
-		if (dto.illnessStart) updateData.illnessStart = dto.illnessStart;
-		if (dto.illnessEnd) updateData.illnessEnd = dto.illnessEnd;
-		if (dto.physicalEducationStart) updateData.physicalEducationStart = dto.physicalEducationStart;
-		if (dto.physicalEducationEnd) updateData.physicalEducationEnd = dto.physicalEducationEnd;
+		if (dto.issueDate) updateData.issueDate = new Date(dto.issueDate);
+		if (dto.illnessStart) updateData.illnessStart = new Date(dto.illnessStart);
+		if (dto.illnessEnd) updateData.illnessEnd = new Date(dto.illnessEnd);
+		if (dto.physicalEducationStart)
+			updateData.physicalEducationStart = new Date(dto.physicalEducationStart);
+		if (dto.physicalEducationEnd)
+			updateData.physicalEducationEnd = new Date(dto.physicalEducationEnd);
 		return this.prismaService.client.excuseNoteModel.update({
 			where: { id },
 			data: updateData,

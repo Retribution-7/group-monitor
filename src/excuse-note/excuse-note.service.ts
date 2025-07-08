@@ -6,7 +6,7 @@ import { ExcuseNoteUpdateDto } from './dto/update-excuse-note.dto';
 import { TYPES } from '../types';
 import { IExcuseNoteRepository } from './excuse-note.repository.interface';
 import { ExcuseNote } from './excuse-note.entity';
-
+import dayjs from 'dayjs';
 @injectable()
 export class ExcuseNoteService implements IExcuseNoteService {
 	constructor(
@@ -17,11 +17,11 @@ export class ExcuseNoteService implements IExcuseNoteService {
 		const excuseNote = new ExcuseNote(
 			dto.studentId,
 			dto.noteNumber,
-			new Date(dto.issueDate),
-			new Date(dto.illnessStart),
-			new Date(dto.illnessEnd),
-			new Date(dto.physicalEducationStart),
-			new Date(dto.physicalEducationEnd),
+			dayjs(dto.issueDate, 'DD.MM.YY').toDate(),
+			dayjs(dto.illnessStart, 'DD.MM.YY').toDate(),
+			dayjs(dto.illnessEnd, 'DD.MM.YY').toDate(),
+			dayjs(dto.physicalEducationStart, 'DD.MM.YY').toDate(),
+			dayjs(dto.physicalEducationEnd, 'DD.MM.YY').toDate(),
 		);
 		return this.excuseNoteRepository.create(excuseNote);
 	}
