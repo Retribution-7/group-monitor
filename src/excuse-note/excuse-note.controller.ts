@@ -62,7 +62,7 @@ export class ExcuseNoteController extends BaseController implements IExcuseNoteC
 		const excuseNote = await this.excuseNoteService.createExcuseNote(body);
 
 		if (!excuseNote) {
-			return next(new HTTPError(404, 'Введены некорректные данные'));
+			return next(new HTTPError(422, 'Введены некорректные данные'));
 		}
 		this.ok(res, {
 			studentID: excuseNote.studentId,
@@ -79,14 +79,14 @@ export class ExcuseNoteController extends BaseController implements IExcuseNoteC
 
 		const excuseNote = await this.excuseNoteService.find(parseInt(id));
 		if (!excuseNote) {
-			return next(new HTTPError(422, 'У студента нет доуступных справок'));
+			return next(new HTTPError(404, 'У студента нет доуступных справок'));
 		}
 		this.ok(res, excuseNote);
 	}
 	async getAll(req: Request, res: Response, next: NextFunction): Promise<void> {
 		const excuseNotes = await this.excuseNoteService.getAll();
 		if (excuseNotes?.length == 0) {
-			return next(new HTTPError(422, 'Нет доступных справок'));
+			return next(new HTTPError(404, 'Нет доступных справок'));
 		}
 		this.ok(res, excuseNotes);
 	}
@@ -97,7 +97,7 @@ export class ExcuseNoteController extends BaseController implements IExcuseNoteC
 		}
 		const excuseNoteToDelete = await this.excuseNoteService.deleteExcuseNote(id);
 		if (!excuseNoteToDelete) {
-			return next(new HTTPError(422, 'Справка не найдена'));
+			return next(new HTTPError(404, 'Справка не найдена'));
 		}
 		this.ok(res, { seccess: true });
 	}
@@ -113,7 +113,7 @@ export class ExcuseNoteController extends BaseController implements IExcuseNoteC
 
 		const excuseNoteToUpdate = await this.excuseNoteService.updateExcuseNote(id, req.body);
 		if (!excuseNoteToUpdate) {
-			return next(new HTTPError(422, 'Справка не найдена'));
+			return next(new HTTPError(404, 'Справка не найдена'));
 		}
 		this.ok(res, excuseNoteToUpdate);
 	}
