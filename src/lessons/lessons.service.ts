@@ -15,7 +15,7 @@ export class LessonsService implements ILessonsService {
 	) {}
 	async createLesson(dto: LessonCreateDto): Promise<LessonModel> {
 		const lesson = new Lesson(
-			parseDate(dto.date),
+			parseDate(dto.date.toISOString()),
 			dto.start,
 			dto.end,
 			dto.subject,

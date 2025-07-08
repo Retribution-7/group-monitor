@@ -63,9 +63,7 @@ export class LessonsRepository implements ILessonsRepository {
 	async update(id: number, dto: LessonUpdateDto): Promise<LessonModel> {
 		const updateData: any = {};
 
-		if (dto.date) {
-			updateData.date = new Date(dto.date).toISOString();
-		}
+		if (dto.date) updateData.date = new Date(dto.date).toISOString();
 		if (dto.start) updateData.start = dto.start;
 		if (dto.end) updateData.end = dto.end;
 		if (dto.subject) updateData.subject = dto.subject;
