@@ -13,4 +13,7 @@ export const TYPES = {
 	StudentsRepository: Symbol.for('StudentsRepository'),
 	StudentsService: Symbol.for('StudentsService'),
 	StudentsController: Symbol.for('StudentsController'),
+	ExcuseNoteRepository: Symbol.for('ExcuseNoteRepository'),
+	ExcuseNoteService: Symbol.for('ExcuseNoteService'),
+	ExcuseNoteController: Symbol.for('ExcuseNoteController'),
 };

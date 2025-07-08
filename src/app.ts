@@ -11,6 +11,7 @@ import { PrismaService } from './database/prisma.service';
 import { AuthMiddleware } from './common/auth.middleware';
 import { LessonsController } from './lessons/lessons.controller';
 import { StudentsController } from './students/students.controller';
+import { ExcuseNoteController } from './excuse-note/excuse-note.controller';
 
 @injectable()
 export class App {
@@ -23,6 +24,7 @@ export class App {
 		@inject(TYPES.UserController) private readonly userController: UserController,
 		@inject(TYPES.LessonsController) private readonly lessonsController: LessonsController,
 		@inject(TYPES.StudentsController) private readonly studentsController: StudentsController,
+		@inject(TYPES.ExcuseNoteController) private readonly excuseNoteController: ExcuseNoteController,
 		@inject(TYPES.ExeptionFilter) private readonly exeptionFilter: IExeptionFilter,
 		@inject(TYPES.ConfigService) private readonly configService: IConfigService,
 		@inject(TYPES.PrismaService) private readonly prismaService: PrismaService,
@@ -41,6 +43,7 @@ export class App {
 		this.app.use('/users', this.userController.router);
 		this.app.use('/lessons', this.lessonsController.router);
 		this.app.use('/students', this.studentsController.router);
+		this.app.use('/excuse-notes', this.excuseNoteController.router);
 	}
 
 	useExeptionFilters(): void {
