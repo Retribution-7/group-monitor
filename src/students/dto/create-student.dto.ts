@@ -7,19 +7,11 @@ import {
 	IsOptional,
 	IsString,
 	Min,
-	Validate,
 	ValidateNested,
-	ValidationOptions,
 } from 'class-validator';
-import { isValidPhoneNumber } from 'libphonenumber-js';
 import { ParentDto } from './parent.dto';
+import { IsValidPhoneNumber } from '../../helpers/helpers';
 
-export function IsValidPhoneNumber(validationOptions?: ValidationOptions): PropertyDecorator {
-	return Validate((value: string) => isValidPhoneNumber(value, 'BY'), {
-		message: 'Invalid phone number',
-		...validationOptions,
-	});
-}
 export class StudentCreateDto {
 	@IsInt({ message: 'Номер записи должен быть целым числом' })
 	@Min(1, { message: 'Номер записи должен быть положительным числом' })

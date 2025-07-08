@@ -8,9 +8,9 @@ import {
 	ValidateNested,
 	IsIn,
 } from 'class-validator';
-import { IsValidPhoneNumber } from './create-student.dto';
 import { Type } from 'class-transformer';
 import { ParentDto } from './parent.dto';
+import { IsValidPhoneNumber } from '../../helpers/helpers';
 
 export class StudentUpdateDto {
 	@IsOptional()

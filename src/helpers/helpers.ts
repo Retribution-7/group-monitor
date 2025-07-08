@@ -1,3 +1,6 @@
+import { ValidationOptions, Validate } from 'class-validator';
+import { isValidPhoneNumber } from 'libphonenumber-js';
+
 export function parseDate(dateString: string): Date {
 	const [day, month, year] = dateString.split('.');
 	const date = new Date(`20${year}-${month}-${day}T00:00:00`);
@@ -7,4 +10,11 @@ export function parseDate(dateString: string): Date {
 	}
 
 	return date;
+}
+
+export function IsValidPhoneNumber(validationOptions?: ValidationOptions): PropertyDecorator {
+	return Validate((value: string) => isValidPhoneNumber(value, 'BY'), {
+		message: 'Invalid phone number',
+		...validationOptions,
+	});
 }

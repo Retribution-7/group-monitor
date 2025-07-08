@@ -1,5 +1,5 @@
 import { IsEnum, IsString } from 'class-validator';
-import { IsValidPhoneNumber } from './create-student.dto';
+import { IsValidPhoneNumber } from '../../helpers/helpers';
 
 export enum ParentType {
 	MOTHER = 'mother',
