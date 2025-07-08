@@ -16,4 +16,7 @@ export const TYPES = {
 	ExcuseNoteRepository: Symbol.for('ExcuseNoteRepository'),
 	ExcuseNoteService: Symbol.for('ExcuseNoteService'),
 	ExcuseNoteController: Symbol.for('ExcuseNoteController'),
+	AbsenceRepository: Symbol.for('AbsenceRepository'),
+	AbsenceService: Symbol.for('AbsenceService'),
+	AbsenceController: Symbol.for('AbsenceController'),
 };

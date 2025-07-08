@@ -1,3 +1,4 @@
+import { Transform } from 'class-transformer';
 import { ValidationOptions, Validate } from 'class-validator';
 import { isValidPhoneNumber } from 'libphonenumber-js';
 
@@ -16,5 +17,18 @@ export function IsValidPhoneNumber(validationOptions?: ValidationOptions): Prope
 	return Validate((value: string) => isValidPhoneNumber(value, 'BY'), {
 		message: 'Invalid phone number',
 		...validationOptions,
+	});
+}
+
+export function CustomDate() {
+	return Transform(({ value }) => {
+		if (typeof value === 'string') {
+			if (value.match(/^\d{2}\.\d{2}\.\d{2}$/)) {
+				const [day, month, year] = value.split('.');
+				return new Date(`20${year}-${month}-${day}T00:00:00`);
+			}
+			return new Date(value);
+		}
+		return value;
 	});
 }
