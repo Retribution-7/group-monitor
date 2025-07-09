@@ -7,8 +7,8 @@ export class AbsenceCreateDto {
 	@IsNotEmpty()
 	studentId: number;
 
-	@IsInt()
-	missedClasses: number;
+	@IsString()
+	missedClasses: string;
 
 	@IsDate()
 	@IsNotEmpty()

@@ -5,7 +5,7 @@ export enum AbsenceStatusType {
 export class Absence {
 	constructor(
 		public studentId: number,
-		public missedClasses: number,
+		public missedClasses: string,
 		public absenceDate: Date,
 		public status: AbsenceStatusType,
 		public comment: string,

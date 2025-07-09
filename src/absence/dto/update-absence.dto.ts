@@ -9,8 +9,8 @@ export class AbsenceUpdateDto {
 	studentId?: number;
 
 	@IsOptional()
-	@IsInt()
-	missedClasses?: number;
+	@IsString()
+	missedClasses?: string;
 
 	@IsDate()
 	@IsNotEmpty()

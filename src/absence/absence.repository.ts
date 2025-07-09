@@ -5,6 +5,7 @@ import { IAbsenceRepository } from './absence.repository.interface';
 import { AbsenceUpdateDto } from './dto/update-absence.dto';
 import { TYPES } from '../types';
 import { PrismaService } from '../database/prisma.service';
+import dayjs from 'dayjs';
 
 @injectable()
 export class AbsenceRepository implements IAbsenceRepository {
@@ -48,7 +49,7 @@ export class AbsenceRepository implements IAbsenceRepository {
 		const updateData: any = {};
 		if (dto.studentId) updateData.studentId = dto.studentId;
 		if (dto.missedClasses) updateData.missedClasses = dto.missedClasses;
-		if (dto.absenceDate) updateData.absenceDate = new Date(dto.absenceDate);
+		if (dto.absenceDate) updateData.absenceDate = dayjs(dto.absenceDate, 'DD.MM.YY').toDate();
 		if (dto.status) updateData.status = dto.status;
 		if (dto.comment) updateData.comment = dto.comment;
 		return this.prismaService.client.absenceModel.update({
