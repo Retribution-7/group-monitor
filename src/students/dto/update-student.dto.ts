@@ -43,6 +43,14 @@ export class StudentUpdateDto {
 	phone?: string;
 
 	@IsOptional()
+	@IsString()
+	address?: string;
+
+	@IsOptional()
+	@IsString()
+	systemPassword?: string;
+
+	@IsOptional()
 	@IsArray()
 	@ValidateNested({ each: true })
 	@Type(() => ParentDto)

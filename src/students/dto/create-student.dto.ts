@@ -35,6 +35,12 @@ export class StudentCreateDto {
 	@IsIn([1, 2], { message: 'Подгруппа должна быть 1 или 2' })
 	subgroup: number;
 
+	@IsString()
+	address: string;
+
+	@IsString()
+	systemPassword: string;
+
 	@IsOptional()
 	@IsArray()
 	@ValidateNested({ each: true })

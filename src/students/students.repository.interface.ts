@@ -5,6 +5,6 @@ import { Student } from './students.entity';
 export interface IStudentsRerository {
 	create: (student: Student) => Promise<StudentModel>;
 	find: (name: string) => Promise<StudentModel[] | null>;
-	delete: (id: number) => Promise<StudentModel>;
-	update: (id: number, dto: StudentUpdateDto) => Promise<StudentModel>;
+	delete: (recordNumber: number) => Promise<StudentModel>;
+	update: (recordNumber: number, dto: StudentUpdateDto) => Promise<StudentModel>;
 }

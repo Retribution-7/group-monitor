@@ -31,7 +31,7 @@ export class StudentsController extends BaseController implements IStudentsContr
 				method: 'get',
 			},
 			{
-				path: '/:id',
+				path: '/:recordNumber',
 				func: this.update as unknown as (
 					req: Request,
 					res: Response,
@@ -40,7 +40,7 @@ export class StudentsController extends BaseController implements IStudentsContr
 				method: 'patch',
 			},
 			{
-				path: '/:id',
+				path: '/:recordNumber',
 				func: this.delete as unknown as (
 					req: Request,
 					res: Response,
@@ -81,13 +81,17 @@ export class StudentsController extends BaseController implements IStudentsContr
 		this.ok(res, students);
 	}
 
-	async delete(req: Request<{ id: string }>, res: Response, next: NextFunction): Promise<void> {
-		const id = parseInt(req.params.id);
-		if (!id) {
+	async delete(
+		req: Request<{ recordNumber: string }>,
+		res: Response,
+		next: NextFunction,
+	): Promise<void> {
+		const recordNumber = parseInt(req.params.recordNumber);
+		if (!recordNumber) {
 			return next(new HTTPError(400, 'Неверный формат ID'));
 		}
 
-		const studentToDelete = await this.studentsService.deleteStudent(id);
+		const studentToDelete = await this.studentsService.deleteStudent(recordNumber);
 
 		if (!studentToDelete) {
 			return next(new HTTPError(404, 'Студент не найден'));
@@ -96,16 +100,16 @@ export class StudentsController extends BaseController implements IStudentsContr
 	}
 
 	async update(
-		req: Request<{ id: string }, object, StudentUpdateDto>,
+		req: Request<{ recordNumber: string }, object, StudentUpdateDto>,
 		res: Response,
 		next: NextFunction,
 	): Promise<void> {
-		const id = parseInt(req.params.id);
-		if (!id) {
+		const recordNumber = parseInt(req.params.recordNumber);
+		if (!recordNumber) {
 			return next(new HTTPError(400, 'Неверный формат ID'));
 		}
 
-		const studentToUpdate = await this.studentsService.updateStudent(id, req.body);
+		const studentToUpdate = await this.studentsService.updateStudent(recordNumber, req.body);
 		if (!studentToUpdate) {
 			return next(new HTTPError(404, 'Студент не найден'));
 		}

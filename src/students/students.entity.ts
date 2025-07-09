@@ -7,6 +7,8 @@ export class Student {
 		public subgroup: number,
 		public email: string,
 		public phone: string,
+		public address: string,
+		public systemPassword: string,
 		public parents: string,
 	) {}
 }

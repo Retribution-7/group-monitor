@@ -21,6 +21,8 @@ export class StudentsService implements IStudentsService {
 			dto.subgroup,
 			dto.email,
 			dto.phone,
+			dto.address,
+			dto.systemPassword,
 			JSON.stringify(dto.parents),
 		);
 		return this.studentsRepository.create(student);
@@ -29,10 +31,10 @@ export class StudentsService implements IStudentsService {
 	getStudents(name: string): Promise<StudentModel[] | null> {
 		return this.studentsRepository.find(name);
 	}
-	deleteStudent(id: number): Promise<StudentModel> {
-		return this.studentsRepository.delete(id);
+	deleteStudent(recordNumber: number): Promise<StudentModel> {
+		return this.studentsRepository.delete(recordNumber);
 	}
-	updateStudent(id: number, dto: StudentUpdateDto): Promise<StudentModel> {
-		return this.studentsRepository.update(id, dto);
+	updateStudent(recordNumber: number, dto: StudentUpdateDto): Promise<StudentModel> {
+		return this.studentsRepository.update(recordNumber, dto);
 	}
 }

@@ -42,12 +42,12 @@ export class LessonsRepository implements ILessonsRepository {
 		return this.prismaService.client.lessonModel.findMany({
 			where: {
 				date: {
-					gte: startOfDay, // Больше или равно началу дня
-					lte: endOfDay, // Меньше или равно концу дня
+					gte: startOfDay,
+					lte: endOfDay,
 				},
 			},
 			orderBy: {
-				date: 'asc', // Сортировка по дате
+				date: 'asc',
 			},
 		});
 	}

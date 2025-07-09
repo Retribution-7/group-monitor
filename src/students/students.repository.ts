@@ -17,10 +17,23 @@ export class StudentsRepository implements IStudentsRerository {
 		subgroup,
 		email,
 		phone,
+		address,
+		systemPassword,
 		parents,
 	}: Student): Promise<StudentModel> {
 		return this.prismaService.client.studentModel.create({
-			data: { recordNumber, firstName, lastName, fathersName, subgroup, email, phone, parents },
+			data: {
+				recordNumber,
+				firstName,
+				lastName,
+				fathersName,
+				subgroup,
+				email,
+				phone,
+				address,
+				systemPassword,
+				parents,
+			},
 		});
 	}
 	async find(name: string): Promise<StudentModel[] | null> {
@@ -34,12 +47,12 @@ export class StudentsRepository implements IStudentsRerository {
 		return students.length > 0 ? students : null;
 	}
 
-	delete(id: number): Promise<StudentModel> {
+	delete(recordNumber: number): Promise<StudentModel> {
 		return this.prismaService.client.studentModel.delete({
-			where: { id },
+			where: { recordNumber },
 		});
 	}
-	update(id: number, dto: StudentUpdateDto): Promise<StudentModel> {
+	update(recordNumber: number, dto: StudentUpdateDto): Promise<StudentModel> {
 		const updateData: any = {};
 
 		if (dto.recordNumber) updateData.recordNumber = dto.recordNumber;
@@ -47,12 +60,14 @@ export class StudentsRepository implements IStudentsRerository {
 		if (dto.lastName) updateData.lastName = dto.lastName;
 		if (dto.fathersName) updateData.fathersName = dto.fathersName;
 		if (dto.email) updateData.email = dto.email;
-		if (dto.phone) updateData.phone = dto.phone;
 		if (dto.subgroup) updateData.subgroup = dto.subgroup;
+		if (dto.phone) updateData.phone = dto.phone;
+		if (dto.address) updateData.address = dto.address;
+		if (dto.systemPassword) updateData.systemPassword = dto.systemPassword;
 		if (dto.parents) updateData.parents = dto.parents;
 
 		return this.prismaService.client.studentModel.update({
-			where: { id },
+			where: { recordNumber },
 			data: updateData,
 		});
 	}
