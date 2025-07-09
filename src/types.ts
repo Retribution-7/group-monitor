@@ -19,4 +19,7 @@ export const TYPES = {
 	AbsenceRepository: Symbol.for('AbsenceRepository'),
 	AbsenceService: Symbol.for('AbsenceService'),
 	AbsenceController: Symbol.for('AbsenceController'),
+	ExamsRepository: Symbol.for('ExamsRepository'),
+	ExamsService: Symbol.for('ExamsService'),
+	ExamsController: Symbol.for('ExamsController'),
 };

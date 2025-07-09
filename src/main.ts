@@ -26,6 +26,9 @@ import { ExcuseNoteController } from './excuse-note/excuse-note.controller';
 import { AbsenceRepository } from './absence/absence.repository';
 import { AbsenceService } from './absence/absence.service';
 import { AbsenceController } from './absence/absence.controller';
+import { ExamsRepository } from './exams/exams.repository';
+import { ExamsService } from './exams/exams.service';
+import { ExamsController } from './exams/exams.controller';
 
 export interface IBootstrapReturn {
 	appContainer: Container;
@@ -55,6 +58,9 @@ export const appBindings = new ContainerModule((bind: interfaces.Bind) => {
 	bind<AbsenceRepository>(TYPES.AbsenceRepository).to(AbsenceRepository).inSingletonScope();
 	bind<AbsenceService>(TYPES.AbsenceService).to(AbsenceService).inSingletonScope();
 	bind<AbsenceController>(TYPES.AbsenceController).to(AbsenceController).inSingletonScope();
+	bind<ExamsRepository>(TYPES.ExamsRepository).to(ExamsRepository).inSingletonScope();
+	bind<ExamsService>(TYPES.ExamsService).to(ExamsService).inSingletonScope();
+	bind<ExamsController>(TYPES.ExamsController).to(ExamsController).inSingletonScope();
 	bind<PrismaService>(TYPES.PrismaService).to(PrismaService).inSingletonScope();
 	bind<App>(TYPES.Application).to(App);
 });

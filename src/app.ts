@@ -13,6 +13,7 @@ import { LessonsController } from './lessons/lessons.controller';
 import { StudentsController } from './students/students.controller';
 import { ExcuseNoteController } from './excuse-note/excuse-note.controller';
 import { AbsenceController } from './absence/absence.controller';
+import { ExamsController } from './exams/exams.controller';
 
 @injectable()
 export class App {
@@ -27,6 +28,7 @@ export class App {
 		@inject(TYPES.StudentsController) private readonly studentsController: StudentsController,
 		@inject(TYPES.ExcuseNoteController) private readonly excuseNoteController: ExcuseNoteController,
 		@inject(TYPES.AbsenceController) private readonly absenceController: AbsenceController,
+		@inject(TYPES.ExamsController) private readonly examsController: ExamsController,
 		@inject(TYPES.ExeptionFilter) private readonly exeptionFilter: IExeptionFilter,
 		@inject(TYPES.ConfigService) private readonly configService: IConfigService,
 		@inject(TYPES.PrismaService) private readonly prismaService: PrismaService,
@@ -47,6 +49,7 @@ export class App {
 		this.app.use('/students', this.studentsController.router);
 		this.app.use('/excuse-notes', this.excuseNoteController.router);
 		this.app.use('/absences', this.absenceController.router);
+		this.app.use('/exams', this.examsController.router);
 	}
 
 	useExeptionFilters(): void {
