@@ -18,15 +18,16 @@ export class AbsenceRepository implements IAbsenceRepository {
 		status,
 		comment,
 	}: Absence): Promise<AbsenceModel> {
-		return this.prismaService.client.absenceModel.create({
-			data: {
-				studentId,
-				missedClasses,
-				absenceDate,
-				status,
-				comment,
-			},
-		});
+		const data: any = {
+			studentId,
+			missedClasses,
+			absenceDate,
+			status,
+		};
+		if (comment !== undefined) {
+			data.comment = comment;
+		}
+		return this.prismaService.client.absenceModel.create({ data });
 	}
 
 	async find(studentId: number): Promise<AbsenceModel[] | null> {

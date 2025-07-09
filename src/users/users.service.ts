@@ -5,7 +5,6 @@ import { IConfigService } from '../config/config.service.interface';
 import { TYPES } from '../types';
 import { IUsersRepository } from './users.repository.interface';
 import { UserModel } from '../generated/prisma';
-import { hash } from 'bcryptjs';
 import { UserLoginDto } from './dto/users-login.dto';
 import { UserRegisterDto } from './dto/users-register.dto';
 
@@ -16,14 +15,28 @@ export class UserService implements IUserService {
 		@inject(TYPES.UsersRepository) private readonly usersRepository: IUsersRepository,
 	) {}
 
-	async createUser({ email, name, password }: UserRegisterDto): Promise<UserModel | null> {
-		const newUser = new User(email, name);
-		const salt = this.configService.get('SALT');
-		await newUser.setPassword(password, Number(salt));
+	async createUser({
+		email,
+		password,
+		firstName,
+		lastName,
+		fathersName,
+	}: UserRegisterDto): Promise<UserModel | null> {
 		const existedUser = await this.usersRepository.find(email);
 		if (existedUser) {
 			return null;
 		}
+
+		const newUser = new User({
+			email,
+			firstName,
+			lastName,
+			fathersName,
+		});
+
+		const salt = Number(this.configService.get('SALT'));
+		await newUser.setPassword(password, salt);
+
 		return this.usersRepository.create(newUser);
 	}
 
@@ -32,7 +45,13 @@ export class UserService implements IUserService {
 		if (!existedUser) {
 			return false;
 		}
-		const newUser = new User(existedUser.email, existedUser.name, existedUser.password);
+		const newUser = new User({
+			email: existedUser.email,
+			firstName: existedUser.firstName ?? undefined,
+			lastName: existedUser.lastName ?? undefined,
+			fathersName: existedUser.fathersName ?? undefined,
+			passwordHash: existedUser.password,
+		});
 		return newUser.comparePassword(password);
 	}
 

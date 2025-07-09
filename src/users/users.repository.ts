@@ -15,12 +15,14 @@ export class UsersRepository implements IUsersRepository {
 			},
 		});
 	}
-	async create({ email, password, name }: User): Promise<UserModel> {
+	async create({ email, password, firstName, lastName, fathersName }: User): Promise<UserModel> {
 		return this.prismaService.client.userModel.create({
 			data: {
 				email,
 				password,
-				name,
+				firstName,
+				lastName,
+				fathersName,
 			},
 		});
 	}

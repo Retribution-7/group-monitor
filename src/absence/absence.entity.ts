@@ -8,6 +8,6 @@ export class Absence {
 		public missedClasses: string,
 		public absenceDate: Date,
 		public status: AbsenceStatusType,
-		public comment: string,
+		public comment?: string,
 	) {}
 }

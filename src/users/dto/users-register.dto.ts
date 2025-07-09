@@ -8,5 +8,11 @@ export class UserRegisterDto {
 	password: string;
 
 	@IsString({ message: 'Не указано имя' })
-	name: string;
+	firstName: string;
+
+	@IsString({ message: 'Не указана фамилия' })
+	lastName: string;
+
+	@IsString({ message: 'Не указано отчество' })
+	fathersName: string;
 }
