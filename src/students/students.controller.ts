@@ -31,6 +31,15 @@ export class StudentsController extends BaseController implements IStudentsContr
 				method: 'get',
 			},
 			{
+				path: '/all',
+				func: this.getAll as unknown as (
+					req: Request,
+					res: Response,
+					next: NextFunction,
+				) => Promise<void>,
+				method: 'get',
+			},
+			{
 				path: '/:recordNumber',
 				func: this.update as unknown as (
 					req: Request,
@@ -79,6 +88,14 @@ export class StudentsController extends BaseController implements IStudentsContr
 		}
 
 		this.ok(res, students);
+	}
+
+	async getAll(req: Request, res: Response, next: NextFunction): Promise<void> {
+		const exams = await this.studentsService.getAll();
+		if (!exams) {
+			return next(new HTTPError(404, 'Список студентов пуст'));
+		}
+		this.ok(res, exams);
 	}
 
 	async delete(

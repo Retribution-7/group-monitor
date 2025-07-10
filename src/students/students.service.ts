@@ -31,6 +31,10 @@ export class StudentsService implements IStudentsService {
 	getStudents(name: string): Promise<StudentModel[] | null> {
 		return this.studentsRepository.find(name);
 	}
+
+	getAll(): Promise<StudentModel[] | null> {
+		return this.studentsRepository.getAll();
+	}
 	deleteStudent(recordNumber: number): Promise<StudentModel> {
 		return this.studentsRepository.delete(recordNumber);
 	}

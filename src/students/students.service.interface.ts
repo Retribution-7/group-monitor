@@ -5,6 +5,7 @@ import { StudentUpdateDto } from './dto/update-student.dto';
 export interface IStudentsService {
 	createStudent: (dto: StudentCreateDto) => Promise<StudentModel>;
 	getStudents: (name: string) => Promise<StudentModel[] | null>;
+	getAll: () => Promise<StudentModel[] | null>;
 	deleteStudent: (recordNumber: number) => Promise<StudentModel>;
 	updateStudent: (recordNumber: number, dto: StudentUpdateDto) => Promise<StudentModel>;
 }

@@ -47,6 +47,10 @@ export class StudentsRepository implements IStudentsRerository {
 		return students.length > 0 ? students : null;
 	}
 
+	async getAll(): Promise<StudentModel[] | null> {
+		return this.prismaService.client.studentModel.findMany();
+	}
+
 	delete(recordNumber: number): Promise<StudentModel> {
 		return this.prismaService.client.studentModel.delete({
 			where: { recordNumber },
