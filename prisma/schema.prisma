@@ -1,0 +1,83 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model UserModel {
+  id          Int       @id @default(autoincrement())
+  password    String
+  email       String
+  firstName   String?
+  lastName    String?
+  fathersName String?
+  birthday    DateTime?
+  phone       String?
+  groupe      String?
+  course      Int?
+  address     String?
+}
+
+model StudentModel {
+  recordNumber   Int    @id
+  firstName      String
+  lastName       String
+  fathersName    String
+  subgroup       Int
+  email          String
+  phone          String
+  address        String
+  systemPassword String
+  parents        String
+}
+
+model LessonModel {
+  id          Int      @id @default(autoincrement())
+  date        DateTime
+  start       String
+  end         String
+  subject     String
+  teacher     String
+  auditorium  String
+  lessonsType String
+}
+
+model AbsenceModel {
+  id            Int      @id @default(autoincrement())
+  studentId     Int
+  missedClasses String
+  absenceDate   DateTime
+  status        String
+  comment       String
+}
+
+model ExcuseNoteModel {
+  id                     Int      @id @default(autoincrement())
+  studentId              Int
+  noteNumber             String
+  issueDate              DateTime
+  illnessStart           DateTime
+  illnessEnd             DateTime
+  physicalEducationStart DateTime
+  physicalEducationEnd   DateTime
+}
+
+model ExamModel {
+  id         Int      @id @default(autoincrement())
+  subject    String
+  date       DateTime
+  start      String
+  auditorium String
+  teacher    String
+  examType   String
+}
