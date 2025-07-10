@@ -91,11 +91,11 @@ export class StudentsController extends BaseController implements IStudentsContr
 	}
 
 	async getAll(req: Request, res: Response, next: NextFunction): Promise<void> {
-		const exams = await this.studentsService.getAll();
-		if (!exams) {
+		const students = await this.studentsService.getAll();
+		if (!students) {
 			return next(new HTTPError(404, 'Список студентов пуст'));
 		}
-		this.ok(res, exams);
+		this.ok(res, students);
 	}
 
 	async delete(

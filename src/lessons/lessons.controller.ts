@@ -32,6 +32,15 @@ export class LessonsController extends BaseController implements ILessonsControl
 				method: 'get',
 			},
 			{
+				path: '/all',
+				func: this.getAll as unknown as (
+					req: Request,
+					res: Response,
+					next: NextFunction,
+				) => Promise<void>,
+				method: 'get',
+			},
+			{
 				path: '/:id',
 				func: this.update as unknown as (
 					req: Request,
@@ -50,6 +59,13 @@ export class LessonsController extends BaseController implements ILessonsControl
 				method: 'delete',
 			},
 		]);
+	}
+	async getAll(req: Request, res: Response, next: NextFunction): Promise<void> {
+		const lessons = await this.lessonsService.getAll();
+		if (!lessons) {
+			return next(new HTTPError(404, 'Список пар пуст'));
+		}
+		this.ok(res, lessons);
 	}
 
 	async create(

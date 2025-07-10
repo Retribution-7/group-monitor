@@ -52,6 +52,10 @@ export class LessonsRepository implements ILessonsRepository {
 		});
 	}
 
+	async getAll(): Promise<LessonModel[] | null> {
+		return this.prismaService.client.lessonModel.findMany();
+	}
+
 	async delete(id: number): Promise<LessonModel> {
 		return this.prismaService.client.lessonModel.delete({
 			where: { id },

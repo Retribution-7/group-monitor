@@ -27,6 +27,10 @@ export class LessonsService implements ILessonsService {
 	async getLessonsByDate(date: string): Promise<LessonModel[] | null> {
 		return await this.lessonsRepository.find(date);
 	}
+
+	getAll(): Promise<LessonModel[] | null> {
+		return this.lessonsRepository.getAll();
+	}
 	async deleteLesson(id: number): Promise<LessonModel> {
 		return await this.lessonsRepository.delete(id);
 	}
