@@ -1,13 +1,33 @@
-import { IsDate, IsEnum, IsNotEmpty, IsOptional, IsString, Matches } from 'class-validator';
-import { LessonType } from '../lesson.entity';
-import { Type } from 'class-transformer';
+import {
+	IsEnum,
+	IsNotEmpty,
+	IsNumber,
+	IsOptional,
+	IsString,
+	Matches,
+	Max,
+	Min,
+} from 'class-validator';
+import { LessonType, weekDayType, weekType } from '../lesson.entity';
 
 export class LessonUpdateDto {
 	@IsOptional()
-	@IsDate()
-	@IsNotEmpty()
-	@Type(() => Date)
-	date?: Date;
+	@IsEnum(weekDayType, {
+		message: `День недели должен быть одним из: ${Object.values(weekDayType).join(', ')}`,
+	})
+	weekDay?: weekDayType;
+
+	@IsOptional()
+	@IsEnum(weekType, {
+		message: `Тип повторения должен быть одним из: ${Object.values(weekType).join(', ')}`,
+	})
+	weekType?: weekType;
+
+	@IsOptional()
+	@IsNumber({}, { message: 'Подгруппа должна быть числом' })
+	@Min(1, { message: 'Подгруппа должна быть не меньше 1' })
+	@Max(2, { message: 'Подгруппа должна быть не больше 2' })
+	subgroup?: number;
 
 	@IsOptional()
 	@IsString()

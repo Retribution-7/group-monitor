@@ -77,13 +77,7 @@ export class LessonsController extends BaseController implements ILessonsControl
 		if (!lesson) {
 			return next(new HTTPError(422, 'Введены некорректные данные'));
 		}
-		this.ok(res, {
-			start: lesson.start,
-			end: lesson.end,
-			subject: lesson.subject,
-			teacher: lesson.teacher,
-			auditorium: lesson.auditorium,
-		});
+		this.ok(res, lesson);
 	}
 
 	async getByDate(

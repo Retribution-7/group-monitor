@@ -42,8 +42,10 @@ model StudentModel {
 }
 
 model LessonModel {
-  id          Int      @id @default(autoincrement())
-  date        DateTime
+  id          Int    @id @default(autoincrement())
+  weekDay     String
+  weekType    String
+  subgroup    Int?
   start       String
   end         String
   subject     String

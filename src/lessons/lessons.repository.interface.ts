@@ -4,7 +4,7 @@ import { Lesson } from './lesson.entity';
 
 export interface ILessonsRepository {
 	create: (lesson: Lesson) => Promise<LessonModel>;
-	find: (date: string) => Promise<LessonModel[] | null>;
+	find: (weekDay: string) => Promise<LessonModel[] | null>;
 	getAll: () => Promise<LessonModel[] | null>;
 	delete: (id: number) => Promise<LessonModel>;
 	update: (id: number, dto: LessonUpdateDto) => Promise<LessonModel>;
